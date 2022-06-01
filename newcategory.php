@@ -18,13 +18,16 @@ $persoonid = $_SESSION["id"];
         </ul>
         <form method="post" action="setnewcategory.php">
             <label for="newcatname">Nieuwe categorienaam:</label>
-            <input type="text" name="newcatname">
-            <input type="submit">
+            <input type="text" name="newcatname"><br>
+            <label for="public">Voor iedereen:</label>
+            <input type="checkbox" name="public"><br>
+            <p><input type="submit">
         </form>
+
         <p>De huidige lijst categoriën</p>
         <ul>
         <?php
-        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' ORDER BY Categorienaam")) {
+        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam")) {
             while ($Categorie = $Categorieresult -> fetch_object()) {
                 printf("<li>%s</li>",$Categorie->Categorienaam);
             }

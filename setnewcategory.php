@@ -21,7 +21,11 @@ function test_input($data) {
     return $data;
 }
 $ConnHandigelinksDB -> autocommit(FALSE);
+if (isset($_POST["public"])){
+$sql = "INSERT INTO tblCategorien (Categorienaam,PersoonID) VALUES ('$categoryvalue','0')";
+} else {
 $sql = "INSERT INTO tblCategorien (Categorienaam,PersoonID) VALUES ('$categoryvalue','$persoonid')";
+}
 $ConnHandigelinksDB -> query($sql);
 if (!$ConnHandigelinksDB -> commit()) {
     echo "Commit transaction failed";

@@ -20,10 +20,10 @@ function test_input($data) {
 
     <body>
         <ul class="menu">
-            <li class="actief"><a href=index.php>Handige Links</a></li>
-            <li class="menu"><a href="settings.php">Instellingen</a></li>
+            <li class="actief"><a href=index.php>Bewerk link</a></li>
             <li class="menu"><a href="newcategory.php">Nieuwe Categorie</a></li>
             <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
+            <li class="menu"><a href=index.php>Handige Links</a></li>
         </ul>
         <form method="post" action="updatelink.php" id="updatelinkform">
             <input type="hidden" value="<?php echo($linkid); ?>" name="updatethislinkid" id="updatethislinkid">

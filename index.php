@@ -17,7 +17,7 @@ $PersoonID = $_SESSION["id"]
             <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
         </ul>
         <?php
-        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$PersoonID' ORDER BY Categorienaam")) {
+        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam,PersoonID FROM tblCategorien WHERE PersoonID = '$PersoonID' ORDER BY Categorienaam")) {
             while ($Categorie = $Categorieresult -> fetch_object()) {
                 $sql="SELECT LinkID,Linknaam,Link,Favicon FROM tblLinks WHERE CategorieID ='$Categorie->CategorieID'";
                 if ($linkresult = $ConnHandigelinksDB -> query($sql)) {
@@ -26,7 +26,12 @@ $PersoonID = $_SESSION["id"]
                 ?>
                 <table width="100%">
                     <tr>
-                        <td width="25%"><h1><?php echo($Categorie->Categorienaam); ?></h1></td>
+                        <?php
+                        if ($Categorie->PersoonID == $PersoonID) { ?>
+                            <td width="25%"><h1><?php echo($Categorie->Categorienaam); ?></h1></td>
+                        <?php } else { ?>
+                            <td width="25%"><h1><?php echo($Categorie->Categorienaam); ?> (Publiek)</h1></td>
+                        <?php } ?>
                         <td style="padding-right:15px;text-align:right" width="75%"><a href="editcategory.php?categoryid=<?php echo($Categorie->CategorieID); ?>" class="small"><b>Bewerken<b></a>
                         <?php
                         if ($linkresult->num_rows == 0) { 

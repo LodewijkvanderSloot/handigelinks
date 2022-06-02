@@ -8,31 +8,58 @@ include "dbconn.php";
 include "header.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];
-$loginnamevalue = "";
-$passwordvalue = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $oldpassword = test_input($_POST["oldpw"]);
-    $newpassword1 = test_input($_POST["newpw1"]);
-    $newpassword2 = test_input($_POST["wachtwoord"]);
+
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
+
+$oldpw = $_POST["oldpw"];
+$newpw1 = $_POST["newpw1"];
+$newpw2 = $_POST["newpw2"];
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    $sql = "SELECT * FROM tblPersonen WHERE PersoonID='$persoonid'";
+    //echo($sql);
+    if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
+        while ($login = $loginresult -> fetch_object()) {
+            $hash = $login->PersoonWachtwoord;
+            $validpassword = password_verify($oldpw,$hash);
+            if ($validpassword) {
+            // Nu controleren of nieuwe wachtwoorden matchen
+                if ($newpw1 === $newpw2) {
+                    // Controleren of wachtwoorden voldoen
+                    if(empty(trim($_POST["newpw1"]))){
+                       $foutje = "Vul een wachtwoord in. ";     
+                    } elseif(strlen(trim($_POST["newpw1"])) < 6){
+                        $foutje = "Het wachtwoord moet minimaal 6 tekens bevatten. ";
+                    } else {
+                    // Ziet er allemaal goed uit. Nieuwe wachtwoord in de database frommelen
+                    $param_password = password_hash($newpw1, PASSWORD_DEFAULT);
+                    $ConnHandigelinksDB -> autocommit(FALSE);
+                    $sql = "UPDATE tblPersonen SET PersoonWachtwoord = '$$param_password' WHERE PersoonID = '$persoonid'";
+                    //echo ($sql);
+                    $ConnHandigelinksDB -> query($sql);
+                    if (!$ConnHandigelinksDB -> commit()) {
+                        echo "Commit transaction failed";
+                        exit();
+                    }
+                    // Redirect user to welcome page
+                    header("location: index.php");
+                    }
+                } else {
+                    $foutje = "Nieuwe wachtwoorden zijn niet hetzelfde!";
+                }
+            } else {
+                $foutje = "Huidige wachtwoord klopt niet!";
+            }
+        //echo("<br>");
+        }
+    }
 }
 
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-//test if new passwords match
-if ($newpassword1 == $newpassword2 {
-    //test if new password is different
-    if (newpassword1 == $oldpassword) {
-        $foutje = "Wachtwoord mag niet hetzelfde zijn."
-    } else {
-        //Doe dingen met wijzigen van het wachtwoord. 
-} else {
-   $foutje = "Nieuwe wachtwoorden zijn niet hetzelfde."
-}
 ?>
 
     <body>
@@ -67,4 +94,5 @@ if ($newpassword1 == $newpassword2 {
 </html>
 <?php
 $ConnHandigelinksDB -> close();
+$foutje = "";
 ?>

@@ -24,6 +24,7 @@ CREATE TABLE tblPersonen (
   PersoonID INT NOT NULL AUTO_INCREMENT,
   PersoonLoginnaam CHAR (255) NOT NULL UNIQUE,
   PersoonWachtwoord CHAR (255) NOT NULL,
+  IsAdmin BOOLEAN NULL,
   PRIMARY KEY (PersoonID)
 );
 CREATE USER 'handigelinks'@'localhost' IDENTIFIED BY 'wachtwoord';

@@ -35,7 +35,7 @@ $persoonid = $_SESSION["id"];
                     <td>
                         <select name="newcategory" form="newlinkform">
                         <?php
-                            if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' ORDER BY Categorienaam")) {
+                            if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam")) {
                                 while ($Categorie = $Categorieresult -> fetch_object()) {
                                     printf('<option value="%s";>%s</option>',$Categorie->CategorieID,$Categorie->Categorienaam);
                                 }

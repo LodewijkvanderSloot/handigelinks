@@ -15,6 +15,15 @@ $PersoonID = $_SESSION["id"]
             <li class="menu"><a href="logoff.php">Afmelden</a></li>
             <li class="menu"><a href="newcategory.php">Nieuwe Categorie</a></li>
             <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
+            <?php
+            if ($ForAdminsOnlyresult = $ConnHandigeLinksDB -> query("SELECT IsAdmin FROM tblPersonen WHERE PersoonID = '$PersoonID'")) {
+                while ($ForAdminsOnly = $ForAdminsOnlyresult -> fetch_object()) {
+                    if ($ForAdminsOnly == 1) {
+                    ?><li class="menu"><a href="settings.php">Instellingen</a></li><?php
+                    }
+                }
+            }
+            ?>
         </ul>
         <?php
         if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam,PersoonID FROM tblCategorien WHERE PersoonID = '$PersoonID' OR PersoonID = '0'  ORDER BY Categorienaam")) {

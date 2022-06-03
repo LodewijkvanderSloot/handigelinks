@@ -17,7 +17,7 @@ $PersoonID = $_SESSION["id"]
             <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
         </ul>
         <?php
-        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam,PersoonID FROM tblCategorien WHERE PersoonID = '$PersoonID' ORDER BY Categorienaam")) {
+        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam,PersoonID FROM tblCategorien WHERE PersoonID = '$PersoonID' OR PersoonID = '0'  ORDER BY Categorienaam")) {
             while ($Categorie = $Categorieresult -> fetch_object()) {
                 $sql="SELECT LinkID,Linknaam,Link,Favicon FROM tblLinks WHERE CategorieID ='$Categorie->CategorieID'";
                 if ($linkresult = $ConnHandigelinksDB -> query($sql)) {

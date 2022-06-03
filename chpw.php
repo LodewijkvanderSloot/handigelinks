@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Ziet er allemaal goed uit. Nieuwe wachtwoord in de database frommelen
                     $param_password = password_hash($newpw1, PASSWORD_DEFAULT);
                     $ConnHandigelinksDB -> autocommit(FALSE);
-                    $sql = "UPDATE tblPersonen SET PersoonWachtwoord = '$$param_password' WHERE PersoonID = '$persoonid'";
+                    $sql = "UPDATE tblPersonen SET PersoonWachtwoord = '$param_password' WHERE PersoonID = '$persoonid'";
                     //echo ($sql);
                     $ConnHandigelinksDB -> query($sql);
                     if (!$ConnHandigelinksDB -> commit()) {

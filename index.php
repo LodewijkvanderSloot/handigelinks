@@ -16,12 +16,16 @@ $PersoonID = $_SESSION["id"]
             <li class="menu"><a href="newcategory.php">Nieuwe Categorie</a></li>
             <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
             <?php
-            if ($ForAdminsOnlyresult = $ConnHandigeLinksDB -> query("SELECT IsAdmin FROM tblPersonen WHERE PersoonID = '$PersoonID'")) {
-                while ($ForAdminsOnly = $ForAdminsOnlyresult -> fetch_object()) {
-                    if ($ForAdminsOnly == 1) {
-                    ?><li class="menu"><a href="settings.php">Instellingen</a></li><?php
+            $sql = "SELECT IsAdmin FROM tblPersonen WHERE PersoonID = '$PersoonID'";
+            if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
+                while ($admin = $adminresult -> fetch_object()) {
+                    if ($admin->IsAdmin == 1) {
+                        ?>
+                        <li class="menu"><a href="settings.php">Instellingen</a></li>
+                        <?php
                     }
                 }
+                $adminresult -> free_result();
             }
             ?>
         </ul>

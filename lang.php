@@ -1,5 +1,5 @@
 <?php
-$Lang = "NL";
+$Lang = "EN";
 If ($Lang == "NL"){ 
     $registervar = "Registreren";
     $loginvar = "Aanmelden";
@@ -14,6 +14,13 @@ If ($Lang == "NL"){
     $publicvar = "(Publiek)";
     $editvar = "Bewerken";
     $deletevar = "Verwijderen";
+    $newcatlbl = "Nieuwe categorienaam:";
+    $newcatpublbl = "Voor iedereen:";
+    $currentcatsvar = "De huidige lijst categoriën";
+    $linknamelbl = "Naam van de nieuwe link:";
+    $linkaddrlbl = "url:";
+    $favicoaddrlbl = "favicon:";
+    $catlbl = "Categorie:";
 }
 If ($Lang == "EN"){ 
     $registervar = "Register";
@@ -29,5 +36,12 @@ If ($Lang == "EN"){
     $publicvar = "(Public)";
     $editvar = "Edit";
     $deletevar = "Delete";
+    $newcatlbl = "New category name:";
+    $newcatpublbl = "Is public:";
+    $currentcatsvar = "Current categories";
+    $linknamelbl = "New link name:";
+    $linkaddrlbl = "url:";
+    $favicoaddrlbl = "favicon:";
+    $catlbl = "Category:";
 }
 ?>

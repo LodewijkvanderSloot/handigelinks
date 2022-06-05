@@ -6,25 +6,27 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 include "dbconn.php";
 include "header.php";
+include "lang.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];
 ?>
 
     <body>
         <ul class="menu">
-            <li class="menu"><a href=index.php>Handige Links</a></li>
-            <li class="actief"><a href="newcategory.php">Nieuwe Categorie</a></li>
-            <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
+            <li class="menu"><a href="logoff.php"><?php echo $logoffvar; ?></a></li>
+            <li class="actief"><a href="newcategory.php"><?php echo $newcatvar; ?></a></li>
+            <li class="menu"><a href="newlink.php"><?php echo $newlinkvar; ?></a></li>
+            <li class="menu"><a href=index.php><?php echo $hanlinkvar; ?></a></li>
         </ul>
         <form method="post" action="setnewcategory.php">
-            <label for="newcatname">Nieuwe categorienaam:</label>
+            <label for="newcatname"><?php echo $newcatlbl; ?></label>
             <input type="text" name="newcatname"><br>
-            <label for="public">Voor iedereen:</label>
+            <label for="public"><?php echo $newcatpublbl; ?></label>
             <input type="checkbox" name="public"><br>
             <p><input type="submit">
         </form>
 
-        <p>De huidige lijst categoriën</p>
+        <p><?php echo $currentcatsvar; ?></p>
         <ul>
         <?php
         if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam")) {

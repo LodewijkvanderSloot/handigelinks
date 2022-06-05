@@ -6,6 +6,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 include "dbconn.php";
 include "header.php";
+include "lang.php";
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $linkid = test_input($_GET["linkid"]);
 }
@@ -20,10 +21,10 @@ function test_input($data) {
 
     <body>
         <ul class="menu">
-            <li class="actief"><a href=index.php>Bewerk link</a></li>
-            <li class="menu"><a href="newcategory.php">Nieuwe Categorie</a></li>
-            <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
-            <li class="menu"><a href=index.php>Handige Links</a></li>
+            <li class="menu"><a href="logoff.php"><?php echo $logoffvar; ?></a></li>
+            <li class="menu"><a href="newcategory.php"><?php echo $newcatvar; ?></a></li>
+            <li class="menu"><a href="newlink.php"><?php echo $newlinkvar; ?></a></li>
+            <li class="actief"><a href=index.php><?php echo $hanlinkvar; ?></a></li>
         </ul>
         <form method="post" action="updatelink.php" id="updatelinkform">
             <input type="hidden" value="<?php echo($linkid); ?>" name="updatethislinkid" id="updatethislinkid">
@@ -35,19 +36,19 @@ if ($linkresult = $ConnHandigelinksDB -> query($sql)) {
 ?>
 
                 <tr>
-                    <td><label for="newlinkname">Naam van de nieuwe link:</label></td>
+                    <td><label for="newlinkname"><?php echo $linknamelbl; ?></label></td>
                     <td><input type="text" name="updatelinkname" value="<?php echo($link->Linknaam); ?>"></td>
                 </tr>
                 <tr>
-                    <td><label for="newurl">url van de nieuwe link:</label></td>
+                    <td><label for="newurl"><?php echo $linkaddrlbl; ?></label></td>
                     <td><input type="text" name="updateurl" value="<?php echo($link->Link); ?>"></td>
                 </tr>
                 <tr>
-                    <td><label for="updatefavicon">url voor favicon:</label></td>
+                    <td><label for="updatefavicon"><?php echo $favicoaddrlbl; ?></label></td>
                     <td><input type="text" name="updatefavicon" value="<?php echo($link->Favicon) ?>"></td>
                 </tr>
                 <tr>
-                    <td><label for="updatecategory">Categorie:</label></td>
+                    <td><label for="updatecategory"><?php echo $catlbl; ?></label></td>
                     <td>
                         <select name="updatecategory" form="updatelinkform">
                         <?php

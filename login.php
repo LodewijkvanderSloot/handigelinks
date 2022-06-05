@@ -9,6 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 include "dbconn.php";
 include "header.php";
+include "lang.php";
 $loginnamevalue = "";
 $passwordvalue = "";
 
@@ -46,7 +47,7 @@ if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
             // Redirect user to welcome page
             header("location: index.php");
 
-        } else {$foutje = "Gebruikersaccount of wachtwoord klopt niet!";}
+        } else {$foutje = $errormsg1;}
         echo("<br>");
         /*if (password_verify($passwordvalue,$login->PersoonWachtwoord)) {
             echo("<br>wachtwoord in orde");
@@ -59,23 +60,23 @@ if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
 
     <body>
     <ul class="menu">
-            <li class="menu"><a href=registreren.php>Registreren</a></li>
-            <li class="actief"><a href="login.php">Aanmelden</a></li>
+            <li class="menu"><a href=registreren.php><?php$registervar?></a></li>
+            <li class="actief"><a href="login.php"><?php$loginvar?></a></li>
         </ul>
         <table>
             <tr>
-                <td><h1>Aanmelden</h1></td>
+                <td><h1><?php$loginvar?></h1></td>
             </tr>
         </table>
         <hr>
         <form method="post" action="login.php">
         <table>
             <tr>
-                <td><label for="naam">Naam:</label></td>
+                <td><label for="naam"><?php$Namelbl?></label></td>
                 <td><input type="text" name="naam"></td>
             </tr>
             <tr>
-                <td><label for="wachtwoord">Wachtwoord:</label></td>
+                <td><label for="wachtwoord"><?php$passwordlbl?></label></td>
                 <td><input type="password" name="wachtwoord"></td>
             </tr>
             <tr>

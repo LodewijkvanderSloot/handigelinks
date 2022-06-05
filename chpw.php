@@ -6,6 +6,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 include "dbconn.php";
 include "header.php";
+include "lang.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];
 
@@ -32,9 +33,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if ($newpw1 === $newpw2) {
                     // Controleren of wachtwoorden voldoen
                     if(empty(trim($_POST["newpw1"]))){
-                       $foutje = "Vul een wachtwoord in. ";     
+                       $foutje = $errpw1;     
                     } elseif(strlen(trim($_POST["newpw1"])) < 6){
-                        $foutje = "Het wachtwoord moet minimaal 6 tekens bevatten. ";
+                        $foutje = $errpw2;
                     } else {
                     // Ziet er allemaal goed uit. Nieuwe wachtwoord in de database frommelen
                     $param_password = password_hash($newpw1, PASSWORD_DEFAULT);
@@ -50,10 +51,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     header("location: index.php");
                     }
                 } else {
-                    $foutje = "Nieuwe wachtwoorden zijn niet hetzelfde!";
+                    $foutje = $errpw3;
                 }
             } else {
-                $foutje = "Huidige wachtwoord klopt niet!";
+                $foutje = $errpw4;
             }
         //echo("<br>");
         }
@@ -64,21 +65,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <body>
         <ul class="menu">
-            <li class="actief"><a href=chpw.php>Wijzig wachtwoord</a></li>
-            <li class="menu"><a href="index.php">Handige Links</a></li>
+            <li class="menu"><a href="logoff.php"><?php echo $logoffvar; ?></a></li>
+            <li class="actief"><a href="chpw.php"><?php echo $chpwvar; ?></a></li>
+            <li class="menu"><a href="newcategory.php"><?php echo $newcatvar; ?></a></li>
+            <li class="menu"><a href="newlink.php"><?php echo $newlinkvar; ?></a></li>
+            <li class="menu"><a href=index.php><?php echo $hanlinkvar; ?></a></li>
         </ul>
         <form method="post" action="chpw.php" id="newpwform">
             <table>
                 <tr>
-                    <td><label for="oldpw">Oude wachtwoord:</label></td>
+                    <td><label for="oldpw"><?php echo $oldpwlbl; ?></label></td>
                     <td><input type="password" name="oldpw"></td>
                 </tr>
                 <tr>
-                    <td><label for="newpw1">Nieuw wachtwoord:</label></td>
+                    <td><label for="newpw1"><?php echo $newpwlbl; ?></label></td>
                     <td><input type="password" name="newpw1"></td>
                 </tr>
                 <tr>
-                    <td><label for="newpw2">Herhaal nieuwe wachtwoord:</label></td>
+                    <td><label for="newpw2"><?php echo $reppwlbl; ?></label></td>
                     <td><input type="password" name="newpw2"></td>
                 </tr>
                 <tr>

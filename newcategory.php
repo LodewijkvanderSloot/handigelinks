@@ -14,9 +14,23 @@ $persoonid = $_SESSION["id"];
     <body>
         <ul class="menu">
             <li class="menu"><a href="logoff.php"><?php echo $logoffvar; ?></a></li>
+            <li class="menu"><a href="chpw.php"><?php echo $chpwvar; ?></a></li>
             <li class="actief"><a href="newcategory.php"><?php echo $newcatvar; ?></a></li>
             <li class="menu"><a href="newlink.php"><?php echo $newlinkvar; ?></a></li>
             <li class="menu"><a href=index.php><?php echo $hanlinkvar; ?></a></li>
+            <?php
+            $sql = "SELECT IsAdmin FROM tblPersonen WHERE PersoonID = '$persoonid'";
+            if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
+                while ($admin = $adminresult -> fetch_object()) {
+                    if ($admin->IsAdmin == 1) {
+                        ?>
+                        <li class="menu"><a href="settings.php"><?php echo $settingsvar; ?></a></li>
+                        <?php
+                    }
+                }
+                $adminresult -> free_result();
+            }
+            ?>
         </ul>
         <form method="post" action="setnewcategory.php">
             <label for="newcatname"><?php echo $newcatlbl; ?></label>

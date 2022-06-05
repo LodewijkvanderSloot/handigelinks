@@ -31,20 +31,7 @@ if (!$ConnHandigelinksDB -> commit()) {
     echo "Commit transaction failed";
     exit();
   }
-header("location:newcategory.php");
-?>
-
-    <body>
-        <ul class="menu">
-            <li class="menu"><a href=index.php>Handige Links</a></li>
-            <li class="menu"><a href="settings.php">Instellingen</a></li>
-            <li class="actief"><a href="newcategory.php">Nieuwe Categorie</a></li>
-            <li class="menu"><a href="newlink.php">Nieuwe link</a></li>
-        </ul>
-        <p>Catergorie toegevoegd.</p>
-    </body>
-</html>
-<?php
+header("location:index.php");
 $TitleResult -> close();
 $BGColorResult -> close();
 $ConnHandigelinksDB -> close();

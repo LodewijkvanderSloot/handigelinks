@@ -7,17 +7,19 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 include "dbconn.php";
 include "header.php";
 include "lang.php";
-$PersoonID = $_SESSION["id"]
+$persoonid = "";
+$persoonid = $_SESSION["id"];
 ?>
 
     <body>
         <ul class="menu">
-            <li class="actief"><a href=index.php><?php echo $hanlinkvar; ?></a></li>
             <li class="menu"><a href="logoff.php"><?php echo $logoffvar; ?></a></li>
+            <li class="menu"><a href="chpw.php"><?php echo $chpwvar; ?></a></li>
             <li class="menu"><a href="newcategory.php"><?php echo $newcatvar; ?></a></li>
             <li class="menu"><a href="newlink.php"><?php echo $newlinkvar; ?></a></li>
+            <li class="actief"><a href=index.php><?php echo $hanlinkvar; ?></a></li>
             <?php
-            $sql = "SELECT IsAdmin FROM tblPersonen WHERE PersoonID = '$PersoonID'";
+            $sql = "SELECT IsAdmin FROM tblPersonen WHERE PersoonID = '$persoonid'";
             if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
                 while ($admin = $adminresult -> fetch_object()) {
                     if ($admin->IsAdmin == 1) {
@@ -31,7 +33,7 @@ $PersoonID = $_SESSION["id"]
             ?>
         </ul>
         <?php
-        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam,PersoonID FROM tblCategorien WHERE PersoonID = '$PersoonID' OR PersoonID = '0'  ORDER BY Categorienaam")) {
+        if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam,PersoonID FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0'  ORDER BY Categorienaam")) {
             while ($Categorie = $Categorieresult -> fetch_object()) {
                 $sql="SELECT LinkID,Linknaam,Link,Favicon FROM tblLinks WHERE CategorieID ='$Categorie->CategorieID'";
                 if ($linkresult = $ConnHandigelinksDB -> query($sql)) {
@@ -41,7 +43,7 @@ $PersoonID = $_SESSION["id"]
                 <table width="100%">
                     <tr>
                         <?php
-                        if ($Categorie->PersoonID == $PersoonID) { ?>
+                        if ($Categorie->PersoonID == $persoonid) { ?>
                             <td width="25%"><h1><?php echo($Categorie->Categorienaam); ?></h1></td>
                         <?php } else { ?>
                             <td width="25%"><h1><?php echo($Categorie->Categorienaam); ?> <?php echo $publicvar; ?></h1></td>

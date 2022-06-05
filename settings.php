@@ -6,6 +6,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 include "dbconn.php";
 include "header.php";
+include "lang.php";
 $PersoonID = $_SESSION["id"]
 ?>
 

@@ -4,7 +4,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-include "dbconn.php";
 include "header.php";
 include "lang.php";
 $persoonid = "";

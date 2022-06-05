@@ -4,7 +4,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-include "dbconn.php";
 include "header.php";
 include "lang.php";
 $persoonid = "";
@@ -68,7 +67,7 @@ if ($linkresult = $ConnHandigelinksDB -> query($sql)) {
                     <td>
                         <select name="updatecategory" form="updatelinkform">
                         <?php
-                            if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam FROM tblCategorien ORDER BY Categorienaam")) {
+                            if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam")) {
                                 while ($Categorie = $Categorieresult -> fetch_object()) {
                                     if ($link->CategorieID == $Categorie->CategorieID) {
                                         ?>

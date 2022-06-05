@@ -4,11 +4,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-include "dbconn.php";
+
 include "header.php";
+//include "dbconn.php";
 include "lang.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];
+$isAdmin = "";
 ?>
 
     <body>
@@ -23,11 +25,13 @@ $persoonid = $_SESSION["id"];
             if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
                 while ($admin = $adminresult -> fetch_object()) {
                     if ($admin->IsAdmin == 1) {
+                        $isAdmin = 'admin';
                         ?>
                         <li class="menu"><a href="settings.php"><?php echo $settingsvar; ?></a></li>
                         <?php
                     }
                 }
+                
                 $adminresult -> free_result();
             }
             ?>
@@ -48,7 +52,13 @@ $persoonid = $_SESSION["id"];
                         <?php } else { ?>
                             <td width="25%"><h1><?php echo($Categorie->Categorienaam); ?> <?php echo $publicvar; ?></h1></td>
                         <?php } ?>
-                        <td style="padding-right:15px;text-align:right" width="75%"><a href="editcategory.php?categoryid=<?php echo($Categorie->CategorieID); ?>" class="small"><b><?php echo $editvar; ?><b></a>
+                        <td style="padding-right:15px;text-align:right" width="75%"><?php 
+                        if ($Categorie -> PersoonID == $persoonid) { ?>
+                        <a href="editcategory.php?categoryid=<?php echo($Categorie->CategorieID); ?>" class="small"><b><?php echo $editvar; ?><b></a><?php } else {
+                            if ($isAdmin == 'admin') { ?>
+                                <a href="editcategory.php?categoryid=<?php echo($Categorie->CategorieID); ?>" class="small"><b><?php echo $editvar; ?><b></a><?php 
+                                }
+                        } ?>
                         <?php
                         if ($linkresult->num_rows == 0) { 
                             ?>

@@ -1,13 +1,9 @@
 <?php
-// Initialize the session
 session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
     exit;
 }
-include "dbconn.php";
 include "header.php";
 include "lang.php";
 $loginnamevalue = "";
@@ -26,41 +22,25 @@ function test_input($data) {
 }
 
 $sql = "SELECT * FROM tblPersonen WHERE PersoonLoginnaam='$loginnamevalue'";
-//echo($sql);
 if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
     while ($login = $loginresult -> fetch_object()) {
-        //echo($login->PersoonLoginnaam);
-        //echo("<br>");
-        //echo($login->PersoonWachtwoord); 
         $hash = $login->PersoonWachtwoord;
-        
         $validpassword = password_verify($passwordvalue,$hash);
         if ($validpassword) {
-
             session_start();
-                            
-            // Store data in session variables
             $_SESSION["loggedin"] = true;
             $_SESSION["id"] = $login->PersoonID;
-            $_SESSION["username"] = $login->PersoonLoginnaam;                            
-            
-            // Redirect user to welcome page
+            $_SESSION["username"] = $login->PersoonLoginnaam;
             header("location: index.php");
-
         } else {$foutje = $errormsg1;}
         echo("<br>");
-        /*if (password_verify($passwordvalue,$login->PersoonWachtwoord)) {
-            echo("<br>wachtwoord in orde");
-        } else {
-            echo("<br>ONJUIST WACHTWOORD");
-        }*/
     }
 }
 ?>
 
     <body>
     <ul class="menu">
-            <li class="menu"><a href=registreren.php><?php echo $registervar; ?></a></li>
+            <li class="menu"><a href=register.php><?php echo $registervar; ?></a></li>
             <li class="actief"><a href="login.php"><?php echo $loginvar; ?></a></li>
         </ul>
         <table>

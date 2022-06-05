@@ -27,6 +27,23 @@ CREATE TABLE tblPersonen (
   IsAdmin BOOLEAN NULL,
   PRIMARY KEY (PersoonID)
 );
+
+DROP TABLE IF EXISTS tblSettings;
+CREATE TABLE tblSettings (
+  SettingID INT NOT NULL AUTO_INCREMENT,
+  SettingName CHAR(255) NOT NULL,
+  SettingValue CHAR(255) NOT NULL,
+  PRIMARY KEY (SettingID)
+);
+
+INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Title','Handige Links');
+INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Version','v2.0');
+INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Language','EN');
+INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Background color','lightblue');
+INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Foreground color','darkblue');
+INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('font','corbel');
+
+
 CREATE USER 'handigelinks'@'localhost' IDENTIFIED BY 'wachtwoord';
 GRANT USAGE ON *.* TO 'handigelinks'@'localhost';
 GRANT ALL PRIVILEGES ON HandigeLinks.* TO 'handigelinks'@'localhost' WITH GRANT OPTION;

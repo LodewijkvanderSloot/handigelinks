@@ -5,7 +5,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 include "dbconn.php";
-include "header.php";
 $linkidvalue = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {

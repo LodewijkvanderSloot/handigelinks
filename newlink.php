@@ -4,7 +4,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-include "dbconn.php";
 include "header.php";
 include "lang.php";
 $persoonid = "";
@@ -23,6 +22,7 @@ $persoonid = $_SESSION["id"];
             if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
                 while ($admin = $adminresult -> fetch_object()) {
                     if ($admin->IsAdmin == 1) {
+                        $isAdmin = 'admin'
                         ?>
                         <li class="menu"><a href="settings.php"><?php echo $settingsvar; ?></a></li>
                         <?php
@@ -51,7 +51,8 @@ $persoonid = $_SESSION["id"];
                     <td>
                         <select name="newcategory" form="newlinkform">
                         <?php
-                            if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam")) {
+                        if ($isAdmin == 'admin') {$sql = "SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam";} else {$sql = "SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' ORDER BY Categorienaam"; }
+                            if ($Categorieresult = $ConnHandigelinksDB -> query($sql)) {
                                 while ($Categorie = $Categorieresult -> fetch_object()) {
                                     printf('<option value="%s";>%s</option>',$Categorie->CategorieID,$Categorie->Categorienaam);
                                 }

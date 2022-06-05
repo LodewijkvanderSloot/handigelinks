@@ -4,7 +4,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-include "dbconn.php";
 include "header.php";
 include "lang.php";
 $persoonid = "";
@@ -23,6 +22,7 @@ $persoonid = $_SESSION["id"];
             if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
                 while ($admin = $adminresult -> fetch_object()) {
                     if ($admin->IsAdmin == 1) {
+                        $isAdmin = 'admin';
                         ?>
                         <li class="menu"><a href="settings.php"><?php echo $settingsvar; ?></a></li>
                         <?php
@@ -35,8 +35,14 @@ $persoonid = $_SESSION["id"];
         <form method="post" action="setnewcategory.php">
             <label for="newcatname"><?php echo $newcatlbl; ?></label>
             <input type="text" name="newcatname"><br>
+            <?php 
+            if ($isAdmin == 'admin') {
+            ?>
             <label for="public"><?php echo $newcatpublbl; ?></label>
             <input type="checkbox" name="public"><br>
+            <?php
+            }
+            ?>
             <p><input type="submit">
         </form>
 

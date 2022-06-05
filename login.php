@@ -60,23 +60,23 @@ if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
 
     <body>
     <ul class="menu">
-            <li class="menu"><a href=registreren.php><?php$registervar?></a></li>
-            <li class="actief"><a href="login.php"><?php$loginvar?></a></li>
+            <li class="menu"><a href=registreren.php><?php echo $registervar; ?></a></li>
+            <li class="actief"><a href="login.php"><?php echo $loginvar; ?></a></li>
         </ul>
         <table>
             <tr>
-                <td><h1><?php$loginvar?></h1></td>
+                <td><h1><?php echo $loginvar; ?></h1></td>
             </tr>
         </table>
         <hr>
         <form method="post" action="login.php">
         <table>
             <tr>
-                <td><label for="naam"><?php$Namelbl?></label></td>
+                <td><label for="naam"><?php echo $namelbl; ?></label></td>
                 <td><input type="text" name="naam"></td>
             </tr>
             <tr>
-                <td><label for="wachtwoord"><?php$passwordlbl?></label></td>
+                <td><label for="wachtwoord"><?php echo $passwordlbl; ?></label></td>
                 <td><input type="password" name="wachtwoord"></td>
             </tr>
             <tr>

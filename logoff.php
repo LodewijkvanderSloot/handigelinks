@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
- 
+setcookie("Koekjes", "", time()-3600);
 // Unset all of the session variables
 $_SESSION = array();
  

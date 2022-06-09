@@ -1,10 +1,7 @@
 <?php
-session_start();
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
+include "checklogin.php";
 include "header.php";
+include "dbconn.php";
 include "lang.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];

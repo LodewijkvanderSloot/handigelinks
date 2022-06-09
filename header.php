@@ -23,13 +23,14 @@ if ($settingResult = $ConnHandigelinksDB -> query("SELECT SettingValue FROM tblS
     }
     $settingResult -> free_result();
 }
+$ConnHandigelinksDB -> close();
 ?>
 <html>
     <header>
         <title><?php echo $titlename; ?> <?php echo $version; ?></title>
         <style type="text/css">
             body {background-color:<?php echo $bgcolor; ?>; margin: 0px}
-            h1 {font-family: Corbel; font-size: 12pt; font-weight: bold; color: <?php echo $fgcolor; ?>; margin-bottom:0px; margin-left: 5px}
+            h1 {font-family: Corbel; font-size: 12pt; font-weight: bold; color: <?php echo $fgcolor; ?>; margin-top: 5px; margin-bottom:0px; margin-left: 5px}
             h2 {font-family: Corbel; font-size: 12pt; font-weight: normal; color: <?php echo $fgcolor; ?>; margin-bottom:0px; margin-left: 5px}
             hr {border-top:0;border-bottom:1px solid <?php echo $fgcolor; ?>;margin-top:0px}
             a {font-family: Corbel; font-size: 10pt; font-weight: normal; color: <?php echo $fgcolor; ?>; margin-left:20px}

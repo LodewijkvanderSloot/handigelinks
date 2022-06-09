@@ -1,12 +1,7 @@
 <?php
-session_start();
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
-
+include "checklogin.php";
 include "header.php";
-//include "dbconn.php";
+include "dbconn.php";
 include "lang.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];
@@ -77,13 +72,16 @@ $isAdmin = "";
                       <tr>
                           <td><a href="<?php echo($link->Link); ?>" target="_blank"><img src="<?php echo($link->Favicon); ?>" style="width:16px;height:16px"></a></td>
                           <td width="25%"><a href="<?php echo($link->Link); ?>" target="_blank"><?php echo($link->Linknaam); ?></a></td>
-                          <td style="padding-right:15px;text-align:right" width="75%"><a href="editlink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $editvar; ?></a><a href="deletelink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $deletevar; ?></a></td>
+                          <td style="padding-right:15px;text-align:right" width="75%"><?php if ($Categorie->PersoonID == $persoonid) { ?><a href="editlink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $editvar; ?></a><a href="deletelink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $deletevar; ?></a><?php } ?></td>
                       </tr>
                       <?php
                   }
               $linkresult -> free_result();
               }
               ?>
+              <tr>
+                  <td colspan="3">&nbsp;</td>
+              </tr>
               </table>
               <?php
             }

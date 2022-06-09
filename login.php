@@ -4,7 +4,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
     exit;
 }
-include "header.php";
+
+include "dbconn.php";
 include "lang.php";
 $loginnamevalue = "";
 $passwordvalue = "";
@@ -30,12 +31,19 @@ if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
             session_start();
             $_SESSION["loggedin"] = true;
             $_SESSION["id"] = $login->PersoonID;
-            $_SESSION["username"] = $login->PersoonLoginnaam;
+            //$_SESSION["username"] = $login->PersoonLoginnaam;
+            if (isset($_POST["onthouden"])){
+                setcookie("Koekjes", $_SESSION["id"], time()+60480);
+            }
+            if (!isset($_POST["onthouden"])){
+                setcookie("Koekjes", "", time()-3600);
+            }
             header("location: index.php");
         } else {$foutje = $errormsg1;}
-        echo("<br>");
     }
 }
+$ConnHandigelinksDB -> close();
+include "header.php";
 ?>
 
     <body>
@@ -58,6 +66,10 @@ if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
             <tr>
                 <td><label for="wachtwoord"><?php echo $passwordlbl; ?></label></td>
                 <td><input type="password" name="wachtwoord"></td>
+            </tr>
+            <tr>
+                <td><label for="onthouden"><?php echo $remembermelbl; ?></label></td>
+                <td><input type="checkbox" name="onthouden"></td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:right"><input type="submit"><input type="reset"></td>

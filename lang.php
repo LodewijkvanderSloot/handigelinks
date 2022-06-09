@@ -1,6 +1,9 @@
 <?php
-$Lang = "EN";
-If ($Lang == "NL"){ 
+//$Lang = substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2);
+//$acceptLang = ["nl", "en"]; 
+//$Lang = in_array($Lang, $acceptLang) ? $lang : "nl";
+$Lang = "nl";
+If ($Lang == "nl"){ 
     $registervar = "Registreren";
     $loginvar = "Aanmelden";
     $namelbl = "Naam:";
@@ -35,9 +38,10 @@ If ($Lang == "NL"){
     $aaccount = "Log dan hier in.";
     $erruser1 = "Vul een gebruikersnaam in. ";
     $erruser2 = "Deze gebruikersnaam bestaat al.";
+    $remembermelbl = "Onthoud me:";
 
 }
-If ($Lang == "EN"){ 
+If ($Lang == "en"){ 
     $registervar = "Register";
     $loginvar = "Login";
     $namelbl = "Name:";
@@ -72,5 +76,6 @@ If ($Lang == "EN"){
     $aaccount = "Log in here.";
     $erruser1 = "Add a username. ";
     $erruser2 = "This username already exists.";
+    $remembermelbl = "Remember me:";
 }
 ?>

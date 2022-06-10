@@ -26,9 +26,14 @@ Een website om links naar andere websites mee op te slaan.
 1.  Het moet mogelijk zijn de ingelogde sessie minstens een week op de computer te onthouden.
 1.  Ingelogde sessies moeten kunnen worden afgemeld. 
 1.  Gebruikers mogen geen links maken, bewerken of verwijderen die altijd zichtbaar zijn. 
-1.  het moet niet mogelijk zijn om categorien middels een url te verwijderen als deze niet leeg zijn.  
+1.  Gebruikers mogen alleen hun eigen links bewerken of verwijderen.
+1.  Gebruikers mogen alleen hun eigen categorien bewerken of verwijderen. 
+1.  Admins moeten ook de categorien van gebruikers kunnen wijzigen.
+1.  Admins moeten ook de links van gebruikers kunnen wijzigen.
+1.  Het moet niet mogelijk zijn om categorien middels een url te verwijderen als deze niet leeg zijn.  
+1.  Alle submit buttons staan rechts. 
 ### Nog uit te voeren
-22. Er moeten admin gebruikers gemaakt kunnen worden. 
+26. Er moeten admin gebruikers gemaakt kunnen worden. 
 1.  Admins moeten gebruikers kunnen aanmaken
 1.  Admins moeten wachtwoorden van gebruikers kunnen aanpassen
 1.  Admins moeten van gebruikers admins kunnen maken
@@ -37,8 +42,6 @@ Een website om links naar andere websites mee op te slaan.
 1.  Admins moeten de style van de site kunnen aanpassen
 1.  Admins moeten de titel van de site kunnen aanpassen
 1.  Admins moeten kunnen aangeven of gebruikers zichzelf mogen registreren. 
-1.  Admins moeten ook de categorien van gebruikers kunnen wijzigen
-1.  Admins moeten ook de links van gebruikers kunnen wijzigen
 1.  Alle submit buttons staan rechts. 
 
 

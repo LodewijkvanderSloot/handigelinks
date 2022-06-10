@@ -5,6 +5,8 @@ include "dbconn.php";
 include "lang.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];
+$isAdmin = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $linkid = test_input($_GET["linkid"]);
 }
@@ -29,6 +31,7 @@ function test_input($data) {
             if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
                 while ($admin = $adminresult -> fetch_object()) {
                     if ($admin->IsAdmin == 1) {
+                        $isAdmin = 'admin';
                         ?>
                         <li class="menu"><a href="settings.php"><?php echo $settingsvar; ?></a></li>
                         <?php
@@ -42,8 +45,16 @@ function test_input($data) {
             <input type="hidden" value="<?php echo($linkid); ?>" name="updatethislinkid" id="updatethislinkid">
             <table>
 <?php
-$sql = "SELECT Linknaam,Link,Favicon,CategorieID FROM tblLinks WHERE LinkID = '$linkid'";
+if ($isAdmin == 'admin') {
+    $sql = "SELECT Linknaam,Link,Favicon,CategorieID FROM tblLinks WHERE LinkID = '$linkid'";    
+} else {
+    $sql = "SELECT tblLinks.Linknaam,tblLinks.Link,tblLinks.Favicon,tblLinks.CategorieID,tblCategorien.PersoonID FROM tblLinks INNER JOIN tblCategorien ON tblLinks.CategorieID = tblCategorien.CategorieID AND tblLinks.LinkID = '$linkid' AND tblCategorien.PersoonID = '$persoonid'";
+}
+//$sql = "SELECT Linknaam,Link,Favicon,CategorieID FROM tblLinks WHERE LinkID = '$linkid'";
 if ($linkresult = $ConnHandigelinksDB -> query($sql)) {
+    if ($linkresult -> num_rows == 0) {
+        header("location: index.php");
+    }
     while ($link = $linkresult -> fetch_object()) {
 ?>
 
@@ -64,7 +75,12 @@ if ($linkresult = $ConnHandigelinksDB -> query($sql)) {
                     <td>
                         <select name="updatecategory" form="updatelinkform">
                         <?php
-                            if ($Categorieresult = $ConnHandigelinksDB -> query("SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam")) {
+                            if ($isAdmin == 'admin') {
+                                $sql = "SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' OR PersoonID = '0' ORDER BY Categorienaam";
+                            } else {
+                                $sql = "SELECT CategorieID,Categorienaam FROM tblCategorien WHERE PersoonID = '$persoonid' ORDER BY Categorienaam";
+                            }
+                            if ($Categorieresult = $ConnHandigelinksDB -> query($sql)) {
                                 while ($Categorie = $Categorieresult -> fetch_object()) {
                                     if ($link->CategorieID == $Categorie->CategorieID) {
                                         ?>

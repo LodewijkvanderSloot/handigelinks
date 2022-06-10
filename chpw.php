@@ -29,9 +29,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if ($newpw1 === $newpw2) {
                     // Controleren of wachtwoorden voldoen
                     if(empty(trim($_POST["newpw1"]))){
-                       $foutje = $errpw1;     
+                       $foutje1 = $errpw1;     
                     } elseif(strlen(trim($_POST["newpw1"])) < 6){
-                        $foutje = $errpw2;
+                        $foutje2 = $errpw2;
                     } else {
                     // Ziet er allemaal goed uit. Nieuwe wachtwoord in de database frommelen
                     $param_password = password_hash($newpw1, PASSWORD_DEFAULT);
@@ -47,10 +47,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     header("location: index.php");
                     }
                 } else {
-                    $foutje = $errpw3;
+                    $foutje3 = $errpw3;
                 }
             } else {
-                $foutje = $errpw4;
+                $foutje4 = $errpw4;
             }
         //echo("<br>");
         }
@@ -72,20 +72,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <tr>
                     <td><label for="oldpw"><?php echo $oldpwlbl; ?></label></td>
                     <td><input type="password" name="oldpw"></td>
+                    <td><p><span class="help-block"><?php echo $foutje4; ?></span></td>
                 </tr>
                 <tr>
                     <td><label for="newpw1"><?php echo $newpwlbl; ?></label></td>
                     <td><input type="password" name="newpw1"></td>
+                    <td><p><span class="help-block"><?php echo $foutje1; echo $foutje2; ?></span></td>
                 </tr>
                 <tr>
                     <td><label for="newpw2"><?php echo $reppwlbl; ?></label></td>
                     <td><input type="password" name="newpw2"></td>
+                    <td><p><span class="help-block"><?php echo $foutje3; ?></span></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align:right"><input type="submit"></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><span class="help_block"><?php echo $foutje; ?></span></td>
                 </tr>
             </table>
             
@@ -94,5 +94,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </html>
 <?php
 $ConnHandigelinksDB -> close();
-$foutje = "";
+$foutje1 ="";
+$foutje2 ="";
+$foutje3 ="";
+$foutje4 ="";
+
 ?>

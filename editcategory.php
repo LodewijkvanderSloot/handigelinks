@@ -5,6 +5,8 @@ include "dbconn.php";
 include "lang.php";
 $persoonid = "";
 $persoonid = $_SESSION["id"];
+$isAdmin = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $categoryid = test_input($_GET["categoryid"]);
 }
@@ -29,6 +31,7 @@ function test_input($data) {
             if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
                 while ($admin = $adminresult -> fetch_object()) {
                     if ($admin->IsAdmin == 1) {
+                        $isAdmin = 'admin';
                         ?>
                         <li class="menu"><a href="settings.php"><?php echo $settingsvar; ?></a></li>
                         <?php
@@ -42,15 +45,29 @@ function test_input($data) {
             <input type="hidden" value="<?php echo($categoryid); ?>" name="updatethiscategoryid" id="updatethiscategoryid">
             <table>
 <?php
-$sql = "SELECT CategorieID,Categorienaam FROM tblCategorien WHERE CategorieID = '$categoryid'";
+$sql = "SELECT CategorieID,Categorienaam,PersoonID FROM tblCategorien WHERE CategorieID = '$categoryid'";
 if ($Categoryresult = $ConnHandigelinksDB -> query($sql)) {
     while ($category = $Categoryresult -> fetch_object()) {
+        if ($isAdmin !== 'admin') {
+            if ($category -> PersoonID !== $persoonid) {
+                header("location:index.php");
+            }
+        }
 ?>
 
                 <tr>
                     <td><label for="updatecategoryform"><?php echo $newcatlbl; ?></label></td>
                     <td><input type="text" name="updatecategoryname" value="<?php echo($category->Categorienaam); ?>"></td>
                 </tr>
+                <?php
+                if ($isAdmin == 'admin') { ?>
+                <tr>
+                    <td><label for="public"><?php echo $newcatpublbl; ?></label></td>
+                    <td><input type="checkbox" name="public" <?php if ($category -> PersoonID == 0) { echo "checked"; } ?>></td>
+                </tr> <?php
+                } 
+                
+                ?>
                 <tr>
                     <td colspan="2" style="text-align:right"><input type="submit"></td>
                 </tr>

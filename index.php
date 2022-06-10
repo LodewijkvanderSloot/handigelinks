@@ -56,9 +56,17 @@ $isAdmin = "";
                         } ?>
                         <?php
                         if ($linkresult->num_rows == 0) { 
-                            ?>
-                            <a href="deletecategory.php?categoryid=<?php echo($Categorie->CategorieID); ?>" class="small"><b><?php echo $deletevar; ?><b></a>
-                            <?php
+                            if ($Categorie -> PersoonID == $persoonid) {
+                                ?>
+                                <a href="deletecategory.php?categoryid=<?php echo($Categorie->CategorieID); ?>" class="small"><b><?php echo $deletevar; ?><b></a>
+                                <?php
+                            } else {
+                                if ($isAdmin == 'admin') {
+                                    ?>
+                                    <a href="deletecategory.php?categoryid=<?php echo($Categorie->CategorieID); ?>" class="small"><b><?php echo $deletevar; ?><b></a>
+                                    <?php
+                                }
+                            }
                         }
                         ?>
                     </tr>
@@ -72,7 +80,15 @@ $isAdmin = "";
                       <tr>
                           <td><a href="<?php echo($link->Link); ?>" target="_blank"><img src="<?php echo($link->Favicon); ?>" style="width:16px;height:16px"></a></td>
                           <td width="25%"><a href="<?php echo($link->Link); ?>" target="_blank"><?php echo($link->Linknaam); ?></a></td>
-                          <td style="padding-right:15px;text-align:right" width="75%"><?php if ($Categorie->PersoonID == $persoonid) { ?><a href="editlink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $editvar; ?></a><a href="deletelink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $deletevar; ?></a><?php } ?></td>
+                          <td style="padding-right:15px;text-align:right" width="75%">
+                          <?php 
+                          if ($Categorie->PersoonID == $persoonid) { 
+                              ?><a href="editlink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $editvar; ?></a><a href="deletelink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $deletevar; ?></a>
+                              <?php 
+                          } elseif ($isAdmin == 'admin') {
+                            ?><a href="editlink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $editvar; ?></a><a href="deletelink.php?linkid=<?php echo($link->LinkID); ?>" class="small"><?php echo $deletevar; ?></a>
+                            <?php
+                          }?></td>
                       </tr>
                       <?php
                   }

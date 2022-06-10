@@ -13,6 +13,32 @@ $passwordvalue = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loginnamevalue = test_input($_POST["naam"]);
     $passwordvalue = $_POST["wachtwoord"];
+
+    $sql = "SELECT * FROM tblPersonen WHERE PersoonLoginnaam='$loginnamevalue'";
+    if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
+        if ($loginresult->num_rows == 0) {
+            $ErrLoginname = $errusername;
+        } else {
+            while ($login = $loginresult -> fetch_object()) {
+                $hash = $login->PersoonWachtwoord;
+                $validpassword = password_verify($passwordvalue,$hash);
+                if ($validpassword) {
+                    session_start();
+                    $_SESSION["loggedin"] = true;
+                    $_SESSION["id"] = $login->PersoonID;
+                    if (isset($_POST["onthouden"])){
+                        setcookie("Koekjes", $_SESSION["id"], time()+60480);
+                    }
+                    if (!isset($_POST["onthouden"])){
+                        setcookie("Koekjes", "", time()-3600);
+                    }
+                    header("location: index.php");
+                } else {
+                    $ErrPassword = $errpassword;
+                }
+            }
+        }
+    }
 }
 
 function test_input($data) {
@@ -21,28 +47,6 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
-
-$sql = "SELECT * FROM tblPersonen WHERE PersoonLoginnaam='$loginnamevalue'";
-if ($loginresult = $ConnHandigelinksDB -> query($sql)) {
-    while ($login = $loginresult -> fetch_object()) {
-        $hash = $login->PersoonWachtwoord;
-        $validpassword = password_verify($passwordvalue,$hash);
-        if ($validpassword) {
-            session_start();
-            $_SESSION["loggedin"] = true;
-            $_SESSION["id"] = $login->PersoonID;
-            //$_SESSION["username"] = $login->PersoonLoginnaam;
-            if (isset($_POST["onthouden"])){
-                setcookie("Koekjes", $_SESSION["id"], time()+60480);
-            }
-            if (!isset($_POST["onthouden"])){
-                setcookie("Koekjes", "", time()-3600);
-            }
-            header("location: index.php");
-        } else {$foutje = $errormsg1;}
-    }
-}
-$ConnHandigelinksDB -> close();
 include "header.php";
 ?>
 
@@ -62,10 +66,12 @@ include "header.php";
             <tr>
                 <td><label for="naam"><?php echo $namelbl; ?></label></td>
                 <td><input type="text" name="naam"></td>
+                <td colspan="2"><p><span class="help-block"><?php echo $ErrLoginname; ?></span></td>
             </tr>
             <tr>
                 <td><label for="wachtwoord"><?php echo $passwordlbl; ?></label></td>
                 <td><input type="password" name="wachtwoord"></td>
+                <td colspan="2"><p><span class="help-block"><?php echo $ErrPassword; ?></span></td>
             </tr>
             <tr>
                 <td><label for="onthouden"><?php echo $remembermelbl; ?></label></td>
@@ -74,15 +80,12 @@ include "header.php";
             <tr>
                 <td colspan="2" style="text-align:right"><input type="submit"><input type="reset"></td>
             </tr>
-            <tr>
-                <td colspan="2"><span class="help_block"><?php echo $foutje; ?></span></td>
-            </tr>
         </table>
         </form>
     </body>
 </html>
 <?php
-$TitleResult -> close();
-$BGColorResult -> close();
+$ErrLoginname = "";
+$ErrPassword = "";
 $ConnHandigelinksDB -> close();
 ?>

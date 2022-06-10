@@ -18,10 +18,10 @@ If ($Lang == "nl"){
     $publicvar = "(Publiek)";
     $editvar = "Bewerken";
     $deletevar = "Verwijderen";
-    $newcatlbl = "Nieuwe categorienaam:";
+    $newcatlbl = "Categorienaam:";
     $newcatpublbl = "Voor iedereen:";
     $currentcatsvar = "De huidige lijst categoriën";
-    $linknamelbl = "Naam van de nieuwe link:";
+    $linknamelbl = "Naam van de link:";
     $linkaddrlbl = "url:";
     $favicoaddrlbl = "favicon:";
     $catlbl = "Categorie:";
@@ -39,6 +39,8 @@ If ($Lang == "nl"){
     $erruser1 = "Vul een gebruikersnaam in. ";
     $erruser2 = "Deze gebruikersnaam bestaat al.";
     $remembermelbl = "Onthoud me:";
+    $errusername = "De gebruikersnaam is niet correct";
+    $errpassword = "Het wachtwoord is niet correct";
 
 }
 If ($Lang == "en"){ 
@@ -56,10 +58,10 @@ If ($Lang == "en"){
     $publicvar = "(Public)";
     $editvar = "Edit";
     $deletevar = "Delete";
-    $newcatlbl = "New category name:";
+    $newcatlbl = "Category name:";
     $newcatpublbl = "Is public:";
     $currentcatsvar = "Current categories";
-    $linknamelbl = "New link name:";
+    $linknamelbl = "Link name:";
     $linkaddrlbl = "url:";
     $favicoaddrlbl = "favicon:";
     $catlbl = "Category:";
@@ -77,5 +79,7 @@ If ($Lang == "en"){
     $erruser1 = "Add a username. ";
     $erruser2 = "This username already exists.";
     $remembermelbl = "Remember me:";
+    $errusername = "De gebruikersnaam is niet correct";
+    $errpassword = "Het wachtwoord is niet correct";
 }
 ?>

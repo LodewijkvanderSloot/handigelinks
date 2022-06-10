@@ -30,17 +30,25 @@ $persoonid = $_SESSION["id"];
             ?>
         </ul>
         <form method="post" action="setnewcategory.php">
-            <label for="newcatname"><?php echo $newcatlbl; ?></label>
-            <input type="text" name="newcatname"><br>
-            <?php 
-            if ($isAdmin == 'admin') {
-            ?>
-            <label for="public"><?php echo $newcatpublbl; ?></label>
-            <input type="checkbox" name="public"><br>
-            <?php
-            }
-            ?>
-            <p><input type="submit">
+            <table>
+                <tr>
+                    <td><label for="newcatname"><?php echo $newcatlbl; ?></label></td>
+                    <td><input type="text" name="newcatname"></td>
+                </tr>
+                <?php 
+                if ($isAdmin == 'admin') {
+                ?>
+                <tr>
+                    <td><label for="public"><?php echo $newcatpublbl; ?></label></td>
+                    <td><input type="checkbox" name="public"></td>
+                </tr>
+                <?php
+                }
+                ?>
+                <tr>
+                    <td colspan ="2" style="text-align:right"><input type="submit"></td>
+                </tr>
+            </table>
         </form>
 
         <p><?php echo $currentcatsvar; ?></p>

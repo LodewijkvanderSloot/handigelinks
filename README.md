@@ -22,9 +22,11 @@ Een website om links naar andere websites mee op te slaan.
 17.  De gebruiker moet zijn wachtwoord kunnen wijzigen.
 1.  Het moet mogelijk zijn om categorien te maken die voor alle gebruikers zichtbaar zijn. 
 1.  De categorien die altijd zichtbaar zijn mogen alleen door admins worden aangemaakt, bewerkt en verwijderd. 
+1.  Alleen admins mogen links maken, bewerken en verwijderen in categorien de voor iedereen zichtbaar zijn.
 1.  Het moet mogelijk zijn de ingelogde sessie minstens een week op de computer te onthouden.
 1.  Ingelogde sessies moeten kunnen worden afgemeld. 
 1.  Gebruikers mogen geen links maken, bewerken of verwijderen die altijd zichtbaar zijn. 
+1.  het moet niet mogelijk zijn om categorien middels een url te verwijderen als deze niet leeg zijn.  
 ### Nog uit te voeren
 22. Er moeten admin gebruikers gemaakt kunnen worden. 
 1.  Admins moeten gebruikers kunnen aanmaken
@@ -35,5 +37,8 @@ Een website om links naar andere websites mee op te slaan.
 1.  Admins moeten de style van de site kunnen aanpassen
 1.  Admins moeten de titel van de site kunnen aanpassen
 1.  Admins moeten kunnen aangeven of gebruikers zichzelf mogen registreren. 
-1. het moet niet mogelijk zijn om categorien middels een url te verwijderen als deze niet leeg zijn.  
+1.  Admins moeten ook de categorien van gebruikers kunnen wijzigen
+1.  Admins moeten ook de links van gebruikers kunnen wijzigen
+1.  Alle submit buttons staan rechts. 
+
 

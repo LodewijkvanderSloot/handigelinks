@@ -32,6 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (!isset($_POST["onthouden"])){
                         setcookie("Koekjes", "", time()-3600);
                     }
+                    if ($login->IsAdmin == 1) {
+                        $ConnHandigelinksDB -> autocommit(FALSE);
+                        $sqllog = "INSERT INTO tblLogs (PersoonID,Log) VALUES ('$login->PersoonID', 'Logged in')";
+                        echo $sqllog;
+                        $ConnHandigelinksDB -> query($sqllog);
+                        if (!$ConnHandigelinksDB -> commit()) {
+                            echo "Commit transaction failed";
+                            exit();
+                        }
+                    }
                     header("location: index.php");
                 } else {
                     $ErrPassword = $errpassword;

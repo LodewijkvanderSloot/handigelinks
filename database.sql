@@ -36,6 +36,15 @@ CREATE TABLE tblSettings (
   PRIMARY KEY (SettingID)
 );
 
+DROP TABLE IF EXISTS tblLogs;
+CREATE TABLE tblLogs (
+  LogID INT NOT NULL AUTO_INCREMENT,
+  Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PersoonID INT NOT NULL,
+  Log CHAR (255) NOT NULL,
+  PRIMARY KEY (logID)
+);
+
 INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Title','Handige Links');
 INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Version','v2.0');
 INSERT INTO tblSettings (SettingName,SettingValue) VALUES ('Language','EN');

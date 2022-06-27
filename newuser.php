@@ -1,10 +1,20 @@
 <?php
-include "header.php";
+include "checklogin.php";
 include "dbconn.php";
-include "lang.php";
-?>
-<?php
- 
+$persoonid = "";
+$persoonid = $_SESSION["id"];
+$isAdmin = "";
+$sql = "SELECT IsAdmin FROM tblPersonen WHERE PersoonID = '$persoonid'";
+if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
+    while ($admin = $adminresult -> fetch_object()) {
+        if ($admin->IsAdmin == 1) {
+            $isAdmin = 'admin';
+        } else {
+            header("location:index.php");
+        }
+    }
+}
+
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
@@ -80,21 +90,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
-                if ($registerresult = $ConnHandigelinksDB -> query("SELECT PersoonID FROM tblPersonen WHERE PersoonLoginnaam = '$username'")) {
-                    while ($newid = $registerresult -> fetch_object()) {
-                        $ConnHandigelinksDB -> autocommit(FALSE);
-                        $sqllog = "INSERT INTO tblLogs (PersoonID,Log) VALUES ('$newid->PersoonID','$username registered as a new user.')";
-                        $ConnHandigelinksDB -> query($sqllog);
-                        if (!$ConnHandigelinksDB -> commit()) {
-                            echo "Commit transaction failed";
-                            exit();
-                        }
-                    }
 
+                $ConnHandigelinksDB -> autocommit(FALSE);
+                $sqllog = "INSERT INTO tblLogs (PersoonID,Log) VALUES ('$persoonid','$username registered as a new user.')";
+                $ConnHandigelinksDB -> query($sqllog);
+                if (!$ConnHandigelinksDB -> commit()) {
+                    echo "Commit transaction failed";
+                    exit();
                 }
-                
-                // Redirect to login page
-                header("location: login.php");
+
+                // Redirect to setting page
+                header("location: settings.php");
             } else{
                 echo "Oeps! Er is iets mis gegaan. Probeer het later opnieuw. ";
             }
@@ -103,50 +109,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $stmt->close();
         }
     }
-    
-    // Close connection
-    $ConnHandigelinksDB->close();
 }
-?>
- 
-    <body>
-        <ul class="menu">
-            <li class="actief"><a href=registreren.php><?php echo $registervar; ?></a></li>
-            <li class="menu"><a href="login.php"><?php echo $loginvar; ?></a></li>
-        </ul>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <table>
-            <tr>
-                <td><h1><?php echo $regh1; ?></h1></td>
-            </tr>
-        </table>
-        <hr>
-        <table>
-            <tr>
-                <td><label for="username"><?php echo $namelbl; ?></label></td>
-                <td><input type="text" name="username" value="<?php echo $username; ?>"></td>
-                <td><span class="help-block"><?php echo $username_err; ?></span></td>
-            </tr>
-            <tr>
-                <td><label for="password"><?php echo $newpwlbl; ?></label></td>
-                <td><input type="password" name="password" value="<?php echo $password; ?>"></td>
-                <td><span class="help-block"><?php echo $password_err; ?></span></td>
-            </tr>
-            <tr>
-                <td><label for="confirm_password"><?php echo $reppwlbl; ?></label></td>
-                <td><input type="password" name="confirm_password" value="<?php echo $confirm_password; ?>"></td>
-                <td><span class="help-block"><?php echo $confirm_password_err; ?></span></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:right"><input type="submit"><input type="reset"></td>
-                <td></td>
-            </tr>
-        </table>
-        
-            <p><?php echo $qaccount; ?><a href="login.php"><?php echo $aaccount; ?></a>.</p>
-        </form>  
-</body>
-</html>
-<?php
+
 $ConnHandigelinksDB -> close();
+header("location:settings.php");
 ?>

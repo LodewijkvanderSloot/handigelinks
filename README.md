@@ -19,7 +19,7 @@ Een website om links naar andere websites mee op te slaan.
 1.  De gebruiker moet een wachtwoord hebben van 6 tekens of meer. 
 1.  Wachtwoorden moeten encrypted worden opgeslagen. 
 ### Versie 2
-17.  De gebruiker moet zijn wachtwoord kunnen wijzigen.
+1.  De gebruiker moet zijn wachtwoord kunnen wijzigen.
 1.  Het moet mogelijk zijn om categorien te maken die voor alle gebruikers zichtbaar zijn. 
 1.  De categorien die altijd zichtbaar zijn mogen alleen door admins worden aangemaakt, bewerkt en verwijderd. 
 1.  Alleen admins mogen links maken, bewerken en verwijderen in categorien de voor iedereen zichtbaar zijn.
@@ -32,16 +32,26 @@ Een website om links naar andere websites mee op te slaan.
 1.  Admins moeten ook de links van gebruikers kunnen wijzigen.
 1.  Het moet niet mogelijk zijn om categorien middels een url te verwijderen als deze niet leeg zijn.  
 1.  Alle submit buttons staan rechts. 
-### Nog uit te voeren
-26. Er moeten admin gebruikers gemaakt kunnen worden. 
-1.  Admins moeten gebruikers kunnen aanmaken
-1.  Admins moeten wachtwoorden van gebruikers kunnen aanpassen
 1.  Admins moeten van gebruikers admins kunnen maken
 1.  Admins moeten van admins gebruikers kunnen maken
+1.  Logins van admin moeten worden gelogd. 
+1.  Aanmaken nieuwe gebruiker moet gelogd worden
+1.  Admins moeten gebruikers kunnen aanmaken
+1.  Admins moeten wachtwoorden van gebruikers kunnen aanpassen
+1. Er moeten admin gebruikers gemaakt kunnen worden. 
+
+### Nog uit te voeren
+1.  Wijzigen gebruiker moet gelogd worden. 
+1.  Verwijderen gebruiker moet gelogd worden. 
+1.  Aanmaken algemene categorie moet gelogd worden. 
+1.  Wijzigen algemene categorie moet gelogd worden. 
+1.  Verwijderen algemene categorie moet gelogd worden. 
+1.  Wijzigen instellingen moet gelogd worden. 
 1.  Admins moeten gebruikers kunnen verwijderen
 1.  Admins moeten de style van de site kunnen aanpassen
 1.  Admins moeten de titel van de site kunnen aanpassen
 1.  Admins moeten kunnen aangeven of gebruikers zichzelf mogen registreren. 
 1.  Alle submit buttons staan rechts. 
+
 
 

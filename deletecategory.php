@@ -31,6 +31,18 @@ if ($linkresult = $ConnHandigelinksDB -> query($sql)) {
     if ($linkresult->num_rows == 0) { 
         $ConnHandigelinksDB -> autocommit(FALSE);
         if ($isAdmin === "admin") {
+            $sql = "SELECT CategorieNaam FROM tblCategorien WHERE CategorieID = '$categoryidvalue'";
+            if ($catresult = $ConnHandigelinksDB -> Query($sql)) {
+                while ($cat = $catresult -> fetch_object()) {
+                    $catname = $cat -> CategorieNaam;
+                }
+            }
+            $sqllog = "INSERT INTO tblLogs (PersoonID,Log) VALUES ('$persoonid','Public category $catname with id $categoryidvalue was deleted.')";
+            $ConnHandigelinksDB -> query($sqllog);
+            if (!$ConnHandigelinksDB -> commit()) {
+                echo "Commit transaction failed";
+                exit();
+            }
             $sql = "DELETE FROM tblCategorien WHERE CategorieID = '$categoryidvalue'";
         } else {
             $sql = "DELETE FROM tblCategorien WHERE CategorieID = '$categoryidvalue' AND PersoonID = '$persoonid'";

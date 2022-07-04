@@ -41,6 +41,7 @@ If ($Lang == "nl"){
     $remembermelbl = "Onthoud me:";
     $errusername = "De gebruikersnaam is niet correct";
     $errpassword = "Het wachtwoord is niet correct";
+    $delnamelbl = "Verwijder deze gebruiker en al zijn links en categoriën: ";
 
 }
 If ($Lang == "en"){ 
@@ -81,5 +82,6 @@ If ($Lang == "en"){
     $remembermelbl = "Remember me:";
     $errusername = "De gebruikersnaam is niet correct";
     $errpassword = "Het wachtwoord is niet correct";
+    $delnamelbl = "Delete this user and all his links and categories: ";
 }
 ?>

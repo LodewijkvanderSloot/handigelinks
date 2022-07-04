@@ -17,9 +17,22 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
+
 $ConnHandigelinksDB -> autocommit(FALSE);
 if (isset($_POST["public"])){
-    $sql = "UPDATE tblCategorien SET Categorienaam = '$categorynamevalue', PersoonID = '0' WHERE CategorieID = '$categoryidvalue'";
+    $sql = "SELECT * FROM tblCategorien WHERE CategorieID = '$categoryidvalue'";
+    if ($catresult = $ConnHandigelinksDB -> query($sql)) {
+        while ($cat = $catresult -> fetch_object()) {
+            $oldcatvalue = $cat->CategorieNaam;
+        }
+    }
+    $sql = "UPDATE tblCategorien SET CategorieNaam = '$categorynamevalue', PersoonID = '0' WHERE CategorieID = '$categoryidvalue'";
+    $sqllog = "INSERT INTO tblLogs (PersoonID,Log) VALUES ('$persoonid','Public category $oldcatvalue changed into $categorynamevalue.')";
+    $ConnHandigelinksDB -> query($sqllog);
+    if (!$ConnHandigelinksDB -> commit()) {
+        echo "Commit transaction failed";
+        exit();
+    }
 } else{
     $sql = "UPDATE tblCategorien SET Categorienaam = '$categorynamevalue', PersoonID = '$persoonid' WHERE CategorieID = '$categoryidvalue'";
 }

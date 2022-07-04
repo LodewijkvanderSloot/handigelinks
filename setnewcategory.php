@@ -18,6 +18,12 @@ function test_input($data) {
 $ConnHandigelinksDB -> autocommit(FALSE);
 if (isset($_POST["public"])){
 $sql = "INSERT INTO tblCategorien (Categorienaam,PersoonID) VALUES ('$categoryvalue','0')";
+$sqllog = "INSERT INTO tblLogs (PersoonID,Log) VALUES ('$persoonid','New public category $categoryvalue made.')";
+$ConnHandigelinksDB -> query($sqllog);
+if (!$ConnHandigelinksDB -> commit()) {
+    echo "Commit transaction failed";
+    exit();
+}
 } else {
 $sql = "INSERT INTO tblCategorien (Categorienaam,PersoonID) VALUES ('$categoryvalue','$persoonid')";
 }

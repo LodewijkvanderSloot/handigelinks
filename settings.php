@@ -182,7 +182,28 @@ if ($adminresult = $ConnHandigelinksDB -> query($sql)) {
             </table>
         </form>
         <hr>
-
+        <h1> 
+        <form method="post" action="deleteuser.php">
+            <table>
+                <tr>
+                    <td><label for="deleteuser"><?php echo $delnamelbl; ?></label></td>
+                    <td><select name="ThisUser">
+                     <?php
+                     $sql = "SELECT PersoonLoginnaam,PersoonID FROM tblPersonen ORDER BY PersoonLoginnaam";
+                     if ($userresult = $ConnHandigelinksDB -> query($sql)) {
+                        while ($user = $userresult -> fetch_object()) {
+                            ?><option value="<?php echo $user->PersoonID; ?>"><?php echo $user->PersoonLoginnaam; ?></option>
+                            <?php
+                        }
+                    }
+                     ?>   
+                    </select></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:right"><input type="submit" value="WEET JE HET ZEKER?"></td>
+                </tr>
+            </table>
+        </form>
 
       <p>Hier moeten dingen komen als Kleur kiezen, Admin maken en taal kiezen. </p>
     </body>

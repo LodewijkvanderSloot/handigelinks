@@ -38,20 +38,20 @@ Een website om links naar andere websites mee op te slaan.
 1.  Aanmaken nieuwe gebruiker moet gelogd worden
 1.  Admins moeten gebruikers kunnen aanmaken
 1.  Admins moeten wachtwoorden van gebruikers kunnen aanpassen
-1. Er moeten admin gebruikers gemaakt kunnen worden. 
-
-### Nog uit te voeren
-1.  Wijzigen gebruiker moet gelogd worden. 
-1.  Verwijderen gebruiker moet gelogd worden. 
+1.  Er moeten admin gebruikers gemaakt kunnen worden. 
 1.  Aanmaken algemene categorie moet gelogd worden. 
 1.  Wijzigen algemene categorie moet gelogd worden. 
 1.  Verwijderen algemene categorie moet gelogd worden. 
-1.  Wijzigen instellingen moet gelogd worden. 
-1.  Admins moeten gebruikers kunnen verwijderen
-1.  Admins moeten de style van de site kunnen aanpassen
-1.  Admins moeten de titel van de site kunnen aanpassen
-1.  Admins moeten kunnen aangeven of gebruikers zichzelf mogen registreren. 
-1.  Alle submit buttons staan rechts. 
+
+### Nog uit te voeren
+1.  Wijzigen gebruiker moet gelogd worden. (Maar er valt niets te wijzigen)
+1.  Verwijderen gebruiker moet gelogd worden. (Methode bedenken, onzichtbaar maken of echt verwijderen)
+1.  Wijzigen instellingen moet gelogd worden. (Gebeurt)
+1.  Admins moeten gebruikers kunnen verwijderen (Methode bedenken)
+1.  Admins moeten de style van de site kunnen aanpassen (is voor later)
+1.  Admins moeten de titel van de site kunnen aanpassen (is voor later)
+1.  Admins moeten kunnen aangeven of gebruikers zichzelf mogen registreren. (is voor later) 
+
 
 
 
